@@ -1,0 +1,213 @@
+.
+├── note
+└── src_code
+    ├── build_support
+    │   └── cmake
+    ├── logo
+    ├── src
+    │   ├── binder
+    │   │   └── statement
+    │   ├── buffer
+    │   ├── catalog
+    │   ├── common
+    │   │   └── util
+    │   ├── concurrency
+    │   ├── container
+    │   │   └── disk
+    │   │       └── hash
+    │   ├── execution
+    │   ├── include
+    │   │   ├── binder
+    │   │   │   ├── expressions
+    │   │   │   ├── statement
+    │   │   │   └── table_ref
+    │   │   ├── buffer
+    │   │   ├── catalog
+    │   │   ├── common
+    │   │   │   ├── enums
+    │   │   │   └── util
+    │   │   ├── concurrency
+    │   │   ├── container
+    │   │   │   ├── disk
+    │   │   │   │   └── hash
+    │   │   │   └── hash
+    │   │   ├── execution
+    │   │   │   ├── executors
+    │   │   │   ├── expressions
+    │   │   │   └── plans
+    │   │   ├── optimizer
+    │   │   ├── planner
+    │   │   ├── primer
+    │   │   ├── recovery
+    │   │   ├── storage
+    │   │   │   ├── disk
+    │   │   │   ├── index
+    │   │   │   ├── page
+    │   │   │   └── table
+    │   │   └── type
+    │   ├── optimizer
+    │   ├── planner
+    │   ├── primer
+    │   ├── recovery
+    │   ├── storage
+    │   │   ├── disk
+    │   │   ├── index
+    │   │   ├── page
+    │   │   └── table
+    │   └── type
+    ├── test
+    │   ├── backtrace
+    │   ├── binder
+    │   ├── buffer
+    │   ├── common
+    │   ├── concurrency
+    │   ├── container
+    │   │   └── disk
+    │   │       └── hash
+    │   ├── include
+    │   │   └── logging
+    │   ├── primer
+    │   ├── recovery
+    │   ├── sql
+    │   ├── storage
+    │   ├── table
+    │   ├── txn
+    │   └── type
+    ├── third_party
+    │   ├── argparse
+    │   │   ├── include
+    │   │   │   └── argparse
+    │   │   ├── packaging
+    │   │   ├── samples
+    │   │   ├── test
+    │   │   └── tools
+    │   ├── backward-cpp
+    │   │   ├── doc
+    │   │   ├── test
+    │   │   └── test_package
+    │   ├── cpp_random_distributions
+    │   ├── fmt
+    │   │   ├── doc
+    │   │   │   ├── _static
+    │   │   │   │   └── fonts
+    │   │   │   ├── _templates
+    │   │   │   ├── basic-bootstrap
+    │   │   │   ├── bootstrap
+    │   │   │   │   └── mixins
+    │   │   │   └── html
+    │   │   │       ├── _sources
+    │   │   │       └── _static
+    │   │   │           └── fonts
+    │   │   ├── include
+    │   │   │   └── fmt
+    │   │   ├── src
+    │   │   ├── support
+    │   │   │   ├── bazel
+    │   │   │   ├── cmake
+    │   │   │   └── rtd
+    │   │   │       └── theme
+    │   │   └── test
+    │   │       ├── add-subdirectory-test
+    │   │       ├── compile-error-test
+    │   │       ├── cuda-test
+    │   │       ├── find-package-test
+    │   │       ├── fuzzing
+    │   │       ├── gtest
+    │   │       │   ├── gmock
+    │   │       │   └── gtest
+    │   │       └── static-export-test
+    │   ├── googletest
+    │   │   ├── ci
+    │   │   ├── docs
+    │   │   │   ├── _data
+    │   │   │   ├── _layouts
+    │   │   │   ├── _sass
+    │   │   │   ├── assets
+    │   │   │   │   └── css
+    │   │   │   └── reference
+    │   │   ├── googlemock
+    │   │   │   ├── cmake
+    │   │   │   ├── docs
+    │   │   │   ├── include
+    │   │   │   │   └── gmock
+    │   │   │   │       └── internal
+    │   │   │   │           └── custom
+    │   │   │   ├── src
+    │   │   │   └── test
+    │   │   └── googletest
+    │   │       ├── cmake
+    │   │       ├── docs
+    │   │       ├── include
+    │   │       │   └── gtest
+    │   │       │       └── internal
+    │   │       │           └── custom
+    │   │       ├── samples
+    │   │       ├── src
+    │   │       └── test
+    │   ├── libfort
+    │   │   ├── cmake
+    │   │   ├── docs
+    │   │   │   ├── images
+    │   │   │   └── tutorial
+    │   │   │       ├── CPP_API
+    │   │   │       └── C_API
+    │   │   ├── examples
+    │   │   ├── lib
+    │   │   ├── src
+    │   │   └── tests
+    │   │       ├── add_subdirectory_tests
+    │   │       ├── bb_tests
+    │   │       ├── bb_tests_cpp
+    │   │       ├── package_tests
+    │   │       └── wb_tests
+    │   ├── libpg_query
+    │   │   ├── grammar
+    │   │   │   ├── keywords
+    │   │   │   ├── statements
+    │   │   │   └── types
+    │   │   └── include
+    │   │       ├── access
+    │   │       ├── catalog
+    │   │       ├── common
+    │   │       ├── datatype
+    │   │       ├── mb
+    │   │       ├── nodes
+    │   │       ├── parser
+    │   │       └── utils
+    │   ├── linenoise
+    │   ├── murmur3
+    │   ├── readerwriterqueue
+    │   │   ├── benchmarks
+    │   │   │   ├── ext
+    │   │   │   │   ├── 1024cores
+    │   │   │   │   └── folly
+    │   │   │   ├── msvc10
+    │   │   │   ├── msvc12
+    │   │   │   └── msvc14
+    │   │   └── tests
+    │   │       ├── common
+    │   │       ├── stabtest
+    │   │       │   ├── msvc10
+    │   │       │   └── msvc12
+    │   │       └── unittests
+    │   │           ├── msvc10
+    │   │           └── msvc12
+    │   └── utf8proc
+    │       ├── bench
+    │       ├── data
+    │       └── test
+    └── tools
+        ├── b_plus_tree_printer
+        ├── bpm_bench
+        ├── btree_bench
+        ├── htable_bench
+        ├── nc-shell
+        ├── shell
+        ├── sqllogictest
+        ├── terrier_bench
+        ├── wasm-bpt-printer
+        │   └── extra_files
+        └── wasm-shell
+            └── extra_files
+
+210 directories

@@ -92,6 +92,10 @@ class HyperLogLogPresto {
   uint64_t cardinality_;
 
   // TODO(student) - can add more data structures as required
+  int16_t n_leading_bits_;          // b
+  int32_t num_registers_;           // m=2^b
+  std::vector<uint8_t> registers_;  // m registers or m buckets
+  std::mutex lock_;
 };
 
 }  // namespace bustub

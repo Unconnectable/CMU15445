@@ -17,9 +17,14 @@ namespace bustub {
 /** @brief Parameterized constructor. */
 template <typename KeyType>
 HyperLogLogPresto<KeyType>::HyperLogLogPresto(int16_t n_leading_bits) {
+  //防止n_leading_bits为负数
   if(n_leading_bits <= 0) 
     n_leading_bits = 1;
   n_leading_bits_ = n_leading_bits;
+
+  //初始化 registers_
+  num_registers_ = 1 << n_leading_bits_;
+  registers_.resize(num_registers_, 0);
   // 预分配内存（防止过度扩展）
   dense_bucket_.reserve(num_registers_);
   overflow_bucket_.reserve(num_registers_);
@@ -29,7 +34,6 @@ HyperLogLogPresto<KeyType>::HyperLogLogPresto(int16_t n_leading_bits) {
     dense_bucket_[i] = std::bitset<DENSE_BUCKET_SIZE>();
     overflow_bucket_[i] = std::bitset<OVERFLOW_BUCKET_SIZE>();
   }
-
   cardinality_ = 0;
 }
 
@@ -86,12 +90,11 @@ template <typename T>
 auto HyperLogLogPresto<T>::ComputeCardinality() -> void {
   /** @TODO(student) Implement this function! */
   double sum = 0.0;
-  for (int i = 0; i < num_registers_; i++) {
+  for (auto i = 0; i < num_registers_; i++) {
     sum += 1.0 / (1 << registers_[i]);
   }
   if (sum == 0.0) {
     cardinality_ = 0;
-
     return;
   }
   double E = CONSTANT * num_registers_ * num_registers_ / sum;

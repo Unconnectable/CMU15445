@@ -15,6 +15,7 @@
 #include <bitset>
 #include <memory>
 #include <mutex>  // NOLINT
+#include <shared_mutex>
 #include <sstream>
 #include <string>
 #include <unordered_map>
@@ -96,6 +97,7 @@ class HyperLogLogPresto {
   int32_t num_registers_;           // m=2^b
   std::vector<uint8_t> registers_;  // m registers or m buckets
   std::mutex lock_;
+  std::shared_mutex shlock_;
 };
 
 }  // namespace bustub

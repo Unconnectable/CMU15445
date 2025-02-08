@@ -18,8 +18,7 @@ namespace bustub {
 template <typename KeyType>
 HyperLogLogPresto<KeyType>::HyperLogLogPresto(int16_t n_leading_bits) {
   //防止n_leading_bits为负数
-  if(n_leading_bits <= 0) 
-    n_leading_bits = 1;
+  if (n_leading_bits <= 0) n_leading_bits = 1;
   n_leading_bits_ = n_leading_bits;
 
   //初始化 registers_
@@ -89,8 +88,9 @@ auto HyperLogLogPresto<KeyType>::AddElem(KeyType val) -> void {
 template <typename T>
 auto HyperLogLogPresto<T>::ComputeCardinality() -> void {
   /** @TODO(student) Implement this function! */
+  std::shared_lock<std::shared_mutex> guard(shlock_);
   double sum = 0.0;
-  for (auto i = 0; i < num_registers_; i++) {
+  for (int i = 0; i < num_registers_; i++) {
     sum += 1.0 / (1 << registers_[i]);
   }
   if (sum == 0.0) {

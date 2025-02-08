@@ -13,12 +13,13 @@
 #pragma once
 
 #include <bitset>
+#include <cmath>
 #include <memory>
-#include <mutex>  // NOLINT
+#include <mutex>
+#include <shared_mutex>
 #include <string>
 #include <utility>
 #include <vector>
-
 #include "common/util/hash_util.h"
 
 /** @brief Capacity of the bitset stream. */
@@ -76,7 +77,8 @@ class HyperLogLog {
   int16_t n_bits_;                  // b
   int32_t num_registers_;           // m=2^b
   std::vector<uint8_t> registers_;  // m registers or m buckets
-  std::mutex lock_;
+  std::mutex mtx;
+  std::shared_mutex shlock_;
 };
 
 }  // namespace bustub

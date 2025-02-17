@@ -77,7 +77,7 @@ class HyperLogLog {
   int16_t n_bits_;                  // b
   int32_t num_registers_;           // m=2^b
   std::vector<uint8_t> registers_;  // m registers or m buckets
-  std::mutex mtx;
+  std::mutex mtx_;
   std::shared_mutex shlock_;
 };
 

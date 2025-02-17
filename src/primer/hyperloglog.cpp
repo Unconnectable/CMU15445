@@ -18,7 +18,9 @@ namespace bustub {
 template <typename KeyType>
 HyperLogLog<KeyType>::HyperLogLog(int16_t n_bits) {
   cardinality_ = 0;
-  if (n_bits < 0) n_bits = 0;
+  if (n_bits < 0) {
+    n_bits = 0;
+  }
   n_bits_ = n_bits;
   num_registers_ = (1 << n_bits);
   registers_.resize(num_registers_, 0);
@@ -50,7 +52,9 @@ auto HyperLogLog<KeyType>::PositionOfLeftmostOne(const std::bitset<BITSET_CAPACI
   /** @TODO(student) Implement this function! */
   //取消掉前面的nbits_位 直接从有效位开始计算
   for (int64_t i = BITSET_CAPACITY - 1 - n_bits_; i >= 0; --i) {
-    if (bset[i] == 1) return static_cast<uint64_t>(BITSET_CAPACITY - n_bits_ - i);
+    if (bset[i]) {
+      return static_cast<uint64_t>(BITSET_CAPACITY - n_bits_ - i);
+    }
   }
   return BITSET_CAPACITY - n_bits_ + 1;
 }
@@ -69,7 +73,7 @@ auto HyperLogLog<KeyType>::AddElem(KeyType val) -> void {
   uint64_t j = (binary >> (BITSET_CAPACITY - n_bits_)).to_ullong();  //桶的编号
   uint64_t p = PositionOfLeftmostOne(binary);                        //计算1的位置
   //他的前面的n_bits_位是记录他的寄存器的位置 x
-  std::lock_guard<std::mutex> lock(mtx);
+  std::lock_guard<std::mutex> lock(mtx_);
   //写入操作
   registers_[j] = std::max(registers_[j], static_cast<uint8_t>(p));
 }
@@ -82,14 +86,14 @@ auto HyperLogLog<KeyType>::ComputeCardinality() -> void {
   //读操作
   std::shared_lock<std::shared_mutex> guard(shlock_);
   double sum = 0.0;
-  if (num_registers_ == 0) return;
+  if (num_registers_ == 0) {
+    return;
+  }
 
   for (int32_t j = 0; j < num_registers_; ++j) {
     sum += 1.00 / std::pow(2, static_cast<double>(registers_[j]));
   }
-
-  double E = CONSTANT * num_registers_ * num_registers_ / sum;
-  cardinality_ = static_cast<size_t>(std::floor(E));
+  cardinality_ = static_cast<size_t>(std::floor(CONSTANT * num_registers_ * num_registers_ / sum));
 }
 
 template class HyperLogLog<int64_t>;

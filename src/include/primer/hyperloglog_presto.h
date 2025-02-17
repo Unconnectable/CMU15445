@@ -13,6 +13,7 @@
 #pragma once
 
 #include <bitset>
+#include <cmath>
 #include <memory>
 #include <mutex>  // NOLINT
 #include <shared_mutex>
@@ -56,7 +57,6 @@ class HyperLogLogPresto {
 
   /** @brief Returns overflow bucket of a specific given index. */
   auto GetOverflowBucketofIndex(uint16_t idx) { return overflow_bucket_[idx]; }
-
   /** @brief Retusn the cardinality of the set. */
   auto GetCardinality() const -> uint64_t { return cardinality_; }
 
@@ -93,10 +93,10 @@ class HyperLogLogPresto {
   uint64_t cardinality_;
 
   // TODO(student) - can add more data structures as required
-  int16_t n_leading_bits_;          // b
-  int32_t num_registers_;           // m=2^b
-  std::vector<uint8_t> registers_;  // m registers or m buckets
-  std::mutex lock_;
+  int16_t n_leading_bits_;  // b
+  int32_t num_registers_;   // m=2^b
+
+  std::mutex mtx_;
   std::shared_mutex shlock_;
 };
 

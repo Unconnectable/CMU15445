@@ -50,7 +50,7 @@ auto HyperLogLog<KeyType>::ComputeBinary(const hash_t &hash) const -> std::bitse
 template <typename KeyType>
 auto HyperLogLog<KeyType>::PositionOfLeftmostOne(const std::bitset<BITSET_CAPACITY> &bset) const -> uint64_t {
   /** @TODO(student) Implement this function! */
-  //取消掉前面的nbits_位 直接从有效位开始计算
+  // 取消掉前面的nbits_位 直接从有效位开始计算
   for (int64_t i = BITSET_CAPACITY - 1 - n_bits_; i >= 0; --i) {
     if (bset[i]) {
       return static_cast<uint64_t>(BITSET_CAPACITY - n_bits_ - i);
@@ -69,12 +69,12 @@ auto HyperLogLog<KeyType>::AddElem(KeyType val) -> void {
   /** @TODO(student) Implement this function! */
   hash_t hash = CalculateHash(val);
   auto binary = ComputeBinary(hash);
-  //保留n_bits 位 即 桶的编号
-  uint64_t j = (binary >> (BITSET_CAPACITY - n_bits_)).to_ullong();  //桶的编号
-  uint64_t p = PositionOfLeftmostOne(binary);                        //计算1的位置
-  //他的前面的n_bits_位是记录他的寄存器的位置 x
+  // 保留n_bits 位 即 桶的编号
+  uint64_t j = (binary >> (BITSET_CAPACITY - n_bits_)).to_ullong();  // 桶的编号
+  uint64_t p = PositionOfLeftmostOne(binary);                        // 计算1的位置
+  // 他的前面的n_bits_位是记录他的寄存器的位置 x
   std::lock_guard<std::mutex> lock(mtx_);
-  //写入操作
+  // 写入操作
   registers_[j] = std::max(registers_[j], static_cast<uint8_t>(p));
 }
 /**
@@ -83,7 +83,7 @@ auto HyperLogLog<KeyType>::AddElem(KeyType val) -> void {
 template <typename KeyType>
 auto HyperLogLog<KeyType>::ComputeCardinality() -> void {
   /** @TODO(student) Implement this function! */
-  //读操作
+  // 读操作
   std::shared_lock<std::shared_mutex> guard(shlock_);
   double sum = 0.0;
   if (num_registers_ == 0) {

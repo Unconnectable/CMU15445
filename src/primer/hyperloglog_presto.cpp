@@ -55,7 +55,7 @@ auto HyperLogLogPresto<KeyType>::AddElem(KeyType val) -> void {
   int64_t new_value = std::max(old_value, tot);
   auto overflow_val = (new_value >> DENSE_BUCKET_SIZE);
 
-  std::lock_guard<std::mutex> lock(mtx_); // write lock
+  std::lock_guard<std::mutex> lock(mtx_);  // write lock
 
   if (overflow_val > 0) {
     overflow_bucket_[j] = overflow_val;
@@ -89,7 +89,7 @@ auto HyperLogLogPresto<KeyType>::AddElem(KeyType val) -> void {
 template <typename T>
 auto HyperLogLogPresto<T>::ComputeCardinality() -> void {
   /** @TODO(student) Implement this function! */
-  std::shared_lock<std::shared_mutex> guard(shlock_); // read lock
+  std::shared_lock<std::shared_mutex> guard(shlock_);  // read lock
 
   double sum = 0.0;
   int m = dense_bucket_.size();
